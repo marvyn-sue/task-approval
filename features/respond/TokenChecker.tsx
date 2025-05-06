@@ -25,9 +25,9 @@ const TokenChecker = () => {
             ? error.message
             : "An unexpected error occurred"
         );
-        // setTimeout(() => {
-        //   router.push("/404");
-        // }, 2000);
+        setTimeout(() => {
+          router.push("/404");
+        }, 2000);
       }
     };
     if (token) getData(token);
