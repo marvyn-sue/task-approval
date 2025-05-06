@@ -75,5 +75,6 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can login using this credentials.
-**const email = "admin@example.com"**
-**const password = "securepassword123"**
+
+**email = "admin@example.com"**
+**password = "securepassword123"**
