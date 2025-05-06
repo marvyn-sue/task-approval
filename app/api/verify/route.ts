@@ -1,15 +1,15 @@
 import ConnectDB from "@/lib/config/db";
-import { verifyToken } from "@/lib/generateToken";
+import { jwtVerify } from "jose";
 import TokenModel from "@/lib/models/TokenModel";
 import { NextRequest, NextResponse } from "next/server";
-import { log } from "node:console";
 
 const LoadDB = async () => {
   await ConnectDB();
 };
 
 LoadDB();
-
+const JWT_SECRET = process.env.JWT_SECRET!;
+const secret = new TextEncoder().encode(JWT_SECRET);
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const token = searchParams.get("token");
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const isTokenValid = verifyToken(token);
+    const isTokenValid = jwtVerify(token, secret);
     if (!isTokenValid) {
       return NextResponse.json({ message: "Token expired" }, { status: 403 });
     }
