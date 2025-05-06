@@ -25,6 +25,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -47,7 +48,7 @@ export function LoginForm({
     },
   });
 
-  const { mutate, isError } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
       router.push("/");
@@ -103,7 +104,8 @@ export function LoginForm({
                   )}
                 />
 
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" disabled={isPending}>
+                  {isPending && <Loader2 className="animate-spin" />}
                   Login
                 </Button>
               </div>
