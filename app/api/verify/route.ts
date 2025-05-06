@@ -10,6 +10,13 @@ const LoadDB = async () => {
 LoadDB();
 const JWT_SECRET = process.env.JWT_SECRET!;
 const secret = new TextEncoder().encode(JWT_SECRET);
+
+export const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const token = searchParams.get("token");
@@ -34,7 +41,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(
       { ...tokenData, taskId: tokenData.taskId.toString() },
-      { status: 200 }
+      { status: 200, headers: corsHeaders }
     );
   } catch (error) {
     return NextResponse.json({ message: "Invalid token" }, { status: 401 });

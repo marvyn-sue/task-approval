@@ -17,7 +17,7 @@ export async function sendApprovalEmail(
       subject: `Task Approval Request`,
       html: `<p>You have a new task:  <strong>${taskTitle}</strong></p>
            <p>Please review and respond using the link below:</p>
-           <a href="${approvalLink}">"${approvalLink}"</a>`,
+           <a href="${approvalLink}">${approvalLink}</a>`,
     });
   } catch (error) {}
 }
