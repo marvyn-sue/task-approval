@@ -27,7 +27,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
     mutationFn: logoutUser,
     onSuccess: (data) => {
       toast.success("Signed out");
-      router.push("/");
+      router.push("/sign-in");
     },
   });
   return (
